@@ -1,0 +1,47 @@
+{
+  "pages": {
+    "/": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/Overview"
+    },
+    "/alarm-history": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/Alarm History"
+    },
+    "/alarms": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/Alarms"
+    },
+    "/audit": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/Audit"
+    },
+    "/database": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/Database"
+    },
+    "/history": {
+      "title": "",
+      "viewPath": "Waterbug/Primary Views/History"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom",
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 80,
+        "viewParams": {},
+        "viewPath": "Waterbug/Docked Views/Nav"
+      }
+    ]
+  }
+}

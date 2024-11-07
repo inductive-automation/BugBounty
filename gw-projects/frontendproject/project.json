@@ -1,0 +1,6 @@
+{
+  "title": "Waterbug Waterworks",
+  "description": "Demo project for the 2024 Ignition 8.1 Bug Bounty.",
+  "enabled": true,
+  "inheritable": false
+}

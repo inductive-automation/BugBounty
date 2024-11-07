@@ -1,0 +1,558 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "style": {
+                        "fontWeight": "bold",
+                        "textAlign": "center"
+                      },
+                      "text": "User must be Operator or above to change state."
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Valve"
+                        },
+                        "position": {
+                          "basis": "100px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.state": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "direct",
+                                "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/ValveState"
+                              },
+                              "transforms": [
+                                {
+                                  "fallback": "faulted",
+                                  "inputType": "scalar",
+                                  "mappings": [
+                                    {
+                                      "input": 0,
+                                      "output": "closed"
+                                    },
+                                    {
+                                      "input": 1,
+                                      "output": "open"
+                                    }
+                                  ],
+                                  "outputType": "scalar",
+                                  "type": "map"
+                                }
+                              ],
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "props": {
+                          "appearance": "p\u0026id",
+                          "value": {
+                            "location": "hidden"
+                          }
+                        },
+                        "type": "ia.symbol.valve"
+                      },
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "MultiStateButton"
+                            },
+                            "position": {
+                              "basis": "80px",
+                              "grow": 1
+                            },
+                            "propConfig": {
+                              "props.controlValue": {
+                                "binding": {
+                                  "config": {
+                                    "bidirectional": true,
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/ValveState"
+                                  },
+                                  "type": "tag"
+                                }
+                              },
+                              "props.indicatorValue": {
+                                "binding": {
+                                  "config": {
+                                    "path": "this.props.controlValue"
+                                  },
+                                  "type": "property"
+                                }
+                              }
+                            },
+                            "props": {
+                              "states": [
+                                {
+                                  "selectedStyle": {
+                                    "backgroundColor": "#AAAAAA",
+                                    "classes": ""
+                                  },
+                                  "text": "Closed",
+                                  "unselectedStyle": {
+                                    "classes": ""
+                                  },
+                                  "value": 0
+                                },
+                                {
+                                  "selectedStyle": {
+                                    "backgroundColor": "#7CEA9C",
+                                    "classes": ""
+                                  },
+                                  "text": "Open",
+                                  "unselectedStyle": {
+                                    "classes": ""
+                                  },
+                                  "value": 1
+                                }
+                              ],
+                              "style": {
+                                "padding": 16
+                              }
+                            },
+                            "type": "ia.input.multi-state-button"
+                          }
+                        ],
+                        "meta": {
+                          "name": "FlexContainer"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 0.5
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Function"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Valve"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderColor": "#AAAAAA",
+                    "borderStyle": "solid",
+                    "borderWidth": 2,
+                    "margin": 32
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "style": {
+                        "fontWeight": "bold",
+                        "textAlign": "center"
+                      },
+                      "text": "User must be Manager or above to change state."
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Pump"
+                        },
+                        "position": {
+                          "basis": "100px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.state": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "direct",
+                                "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/PumpState"
+                              },
+                              "transforms": [
+                                {
+                                  "fallback": "faulted",
+                                  "inputType": "scalar",
+                                  "mappings": [
+                                    {
+                                      "input": 0,
+                                      "output": "stopped"
+                                    },
+                                    {
+                                      "input": 1,
+                                      "output": "running"
+                                    }
+                                  ],
+                                  "outputType": "scalar",
+                                  "type": "map"
+                                }
+                              ],
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "props": {
+                          "value": {
+                            "location": "hidden"
+                          }
+                        },
+                        "type": "ia.symbol.pump"
+                      },
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "MultiStateButton"
+                            },
+                            "position": {
+                              "basis": "80px",
+                              "grow": 10
+                            },
+                            "propConfig": {
+                              "props.controlValue": {
+                                "binding": {
+                                  "config": {
+                                    "bidirectional": true,
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/PumpState"
+                                  },
+                                  "type": "tag"
+                                }
+                              },
+                              "props.indicatorValue": {
+                                "binding": {
+                                  "config": {
+                                    "path": "this.props.controlValue"
+                                  },
+                                  "type": "property"
+                                }
+                              }
+                            },
+                            "props": {
+                              "states": [
+                                {
+                                  "selectedStyle": {
+                                    "backgroundColor": "#FF8A8A",
+                                    "classes": ""
+                                  },
+                                  "text": "Faulted",
+                                  "unselectedStyle": {
+                                    "classes": ""
+                                  },
+                                  "value": 2
+                                },
+                                {
+                                  "selectedStyle": {
+                                    "backgroundColor": "#AAAAAA",
+                                    "classes": ""
+                                  },
+                                  "text": "Off",
+                                  "unselectedStyle": {
+                                    "classes": ""
+                                  },
+                                  "value": 0
+                                },
+                                {
+                                  "selectedStyle": {
+                                    "backgroundColor": "#7CEA9C",
+                                    "classes": ""
+                                  },
+                                  "text": "Running",
+                                  "unselectedStyle": {
+                                    "classes": ""
+                                  },
+                                  "value": 1
+                                }
+                              ],
+                              "style": {
+                                "padding": 16
+                              }
+                            },
+                            "type": "ia.input.multi-state-button"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Buttons"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 0.5
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Function"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Pump"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderColor": "#AAAAAA",
+                    "borderStyle": "solid",
+                    "borderWidth": 2,
+                    "margin": 32
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Left"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px"
+                    },
+                    "props": {
+                      "style": {
+                        "fontWeight": "bold",
+                        "textAlign": "center"
+                      },
+                      "text": "User must be Admin to change state."
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Vessel"
+                    },
+                    "position": {
+                      "basis": "100px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.state": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/TankState"
+                          },
+                          "transforms": [
+                            {
+                              "fallback": "faulted",
+                              "inputType": "scalar",
+                              "mappings": [
+                                {
+                                  "input": 0,
+                                  "output": "stopped"
+                                },
+                                {
+                                  "input": 1,
+                                  "output": "running"
+                                }
+                              ],
+                              "outputType": "scalar",
+                              "type": "map"
+                            }
+                          ],
+                          "type": "tag"
+                        }
+                      },
+                      "props.value.value": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "direct",
+                            "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Sine/TankLevel"
+                          },
+                          "type": "tag"
+                        }
+                      }
+                    },
+                    "props": {
+                      "appearance": "simple",
+                      "displayStand": false,
+                      "value": {}
+                    },
+                    "type": "ia.symbol.vessel"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "MultiStateButton"
+                },
+                "position": {
+                  "basis": "80px",
+                  "grow": 0.1
+                },
+                "propConfig": {
+                  "props.controlValue": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "fallbackDelay": 2.5,
+                        "mode": "direct",
+                        "tagPath": "[backend_default_remote_tag_provider]Waterbug/Simulator/Writeable/TankState"
+                      },
+                      "type": "tag"
+                    }
+                  },
+                  "props.indicatorValue": {
+                    "binding": {
+                      "config": {
+                        "path": "this.props.controlValue"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "states": [
+                    {
+                      "selectedStyle": {
+                        "backgroundColor": "#FF8A8A",
+                        "classes": ""
+                      },
+                      "text": "Faulted",
+                      "unselectedStyle": {
+                        "classes": ""
+                      },
+                      "value": 2
+                    },
+                    {
+                      "selectedStyle": {
+                        "backgroundColor": "#AAAAAA",
+                        "classes": ""
+                      },
+                      "text": "Off",
+                      "unselectedStyle": {
+                        "classes": ""
+                      },
+                      "value": 0
+                    },
+                    {
+                      "selectedStyle": {
+                        "backgroundColor": "#7CEA9C",
+                        "classes": ""
+                      },
+                      "text": "Running",
+                      "unselectedStyle": {
+                        "classes": ""
+                      },
+                      "value": 1
+                    }
+                  ]
+                },
+                "type": "ia.input.multi-state-button"
+              }
+            ],
+            "meta": {
+              "name": "Right"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "margin": 32
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Pumps"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

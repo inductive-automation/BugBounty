@@ -1,0 +1,98 @@
+##################################################################
+# Chase Dorsey, Inductive Automation    May. 21, 2024
+# Thank you to Kevin Collins!
+#
+# # YAML includes two Ignition servers and Postgres
+#
+# ${foo:-bar} denotes an environmental variable "foo" with a 
+#    default value "bar"
+##################################################################
+x-ignition-opts: &ignition-opts
+  image: inductiveautomation/ignition:8.1.44
+
+services:
+  # Ignition Gateway
+  backend-gw1:
+    image: "inductiveautomation/ignition:8.1.44"
+    hostname: backend-gw1
+    restart: always
+    ports:
+      - 18088:8088
+      - 18043:8043
+    volumes:
+      # Gateway backup
+      - ./gw-init/backend.gwbk:/restore.gwbk
+      
+      # Ignition Data
+      - ignBackendData:/usr/local/bin/ignition/data
+      
+      # SSL Keystore
+      - ./gw-init/backend-ssl.pfx:/usr/local/bin/ignition/webserver/ssl.pfx
+
+      # Metro Keystore
+      - ./gw-init/backend-metro-keystore:/usr/local/bin/ignition/webserver/metro-keystore
+    environment:
+      ACCEPT_IGNITION_EULA: 'Y'
+      IGNITION_EDITION: standard
+      GATEWAY_NETWORK_REQUIRETWOWAYAUTH: "true"
+      GATEWAY_NETWORK_SECURITYPOLICY: "Unrestricted"
+      TZ: America/Los_Angeles
+    command:
+      -n bb_ign_backend
+      -r /restore.gwbk
+
+  frontend-gw1:
+    image: "inductiveautomation/ignition:8.1.44"
+    hostname: frontend-gw1
+    restart: always
+    ports:
+      - 28088:8088
+      - 28043:8043
+    volumes:
+      # Gateway backup
+      - ./gw-init/frontend.gwbk:/restore.gwbk
+      
+      # Ignition Data
+      - ignFrontendData:/usr/local/bin/ignition/data
+      
+      # Ignition Project
+      - ./gw-projects/frontendproject:/usr/local/bin/ignition/data/projects/frontendproject
+      
+      # SSL Keystore
+      - ./gw-init/frontend-ssl.pfx:/usr/local/bin/ignition/webserver/ssl.pfx
+      
+      # Metro Keystore
+      - ./gw-init/frontend-metro-keystore:/usr/local/bin/ignition/webserver/metro-keystore
+      
+      # UUID
+      - ./gw-init/frontend.uuid:/usr/local/bin/ignition/data/.uuid
+    user: 0:0  
+    environment:
+      ACCEPT_IGNITION_EULA: 'Y'
+      IGNITION_EDITION: standard
+      GATEWAY_NETWORK_REQUIRETWOWAYAUTH: "true"
+      GATEWAY_NETWORK_0_HOST: backend-gw1
+      TZ: America/Los_Angeles
+    command:
+      -n bb_ign_frontend
+      -r /restore.gwbk
+      
+  # Postgres Database
+  postgres:
+    image: postgres:16.3
+    hostname: PostgreSQL
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: PostgreSQL
+      POSTGRES_USER: Postgres
+      POSTGRES_DB: Postgres
+      TZ: America/Los_Angeles
+    ports:
+     - 15432:5432
+    volumes:
+      - pgData:/var/lib/postgresql/data
+    
+volumes:
+  ignBackendData:
+  ignFrontendData:
+  pgData:
