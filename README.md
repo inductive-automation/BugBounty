@@ -1,6 +1,6 @@
 # Ignition Bug Bounty
 
-This repository is used as a testing stack for the Ignition 8.1.43 bug bounty
+This repository is used as a testing stack for the Ignition 8.1.44 bug bounty
 
 # How It Works
 
