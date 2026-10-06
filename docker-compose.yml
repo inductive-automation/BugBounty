@@ -1,19 +1,15 @@
 ##################################################################
-# Chase Dorsey, Inductive Automation    May. 21, 2024
-# Thank you to Kevin Collins!
+# Chase Dorsey, Inductive Automation    Aug. 28, 2026
 #
 # # YAML includes two Ignition servers and Postgres
-#
-# ${foo:-bar} denotes an environmental variable "foo" with a 
-#    default value "bar"
 ##################################################################
 x-ignition-opts: &ignition-opts
-  image: inductiveautomation/ignition:8.1.44
+  image: inductiveautomation/ignition:8.3.9
 
 services:
   # Ignition Gateway
   backend-gw1:
-    image: "inductiveautomation/ignition:8.1.44"
+    <<: [ *ignition-opts ]
     hostname: backend-gw1
     restart: always
     ports:
@@ -25,12 +21,7 @@ services:
       
       # Ignition Data
       - ignBackendData:/usr/local/bin/ignition/data
-      
-      # SSL Keystore
-      - ./gw-init/backend-ssl.pfx:/usr/local/bin/ignition/webserver/ssl.pfx
 
-      # Metro Keystore
-      - ./gw-init/backend-metro-keystore:/usr/local/bin/ignition/webserver/metro-keystore
     environment:
       ACCEPT_IGNITION_EULA: 'Y'
       IGNITION_EDITION: standard
@@ -39,10 +30,11 @@ services:
       TZ: America/Los_Angeles
     command:
       -n bb_ign_backend
-      -r /restore.gwbk
+      --restore-local /restore.gwbk
 
   frontend-gw1:
-    image: "inductiveautomation/ignition:8.1.44"
+    <<: [ *ignition-opts ]
+    user: 0:0
     hostname: frontend-gw1
     restart: always
     ports:
@@ -57,25 +49,18 @@ services:
       
       # Ignition Project
       - ./gw-projects/frontendproject:/usr/local/bin/ignition/data/projects/frontendproject
-      
-      # SSL Keystore
-      - ./gw-init/frontend-ssl.pfx:/usr/local/bin/ignition/webserver/ssl.pfx
-      
-      # Metro Keystore
-      - ./gw-init/frontend-metro-keystore:/usr/local/bin/ignition/webserver/metro-keystore
-      
-      # UUID
-      - ./gw-init/frontend.uuid:/usr/local/bin/ignition/data/.uuid
-    user: 0:0  
+
     environment:
       ACCEPT_IGNITION_EULA: 'Y'
       IGNITION_EDITION: standard
       GATEWAY_NETWORK_REQUIRETWOWAYAUTH: "true"
       GATEWAY_NETWORK_0_HOST: backend-gw1
       TZ: America/Los_Angeles
+      IGNITION_UID: 2003
+      IGNITION_GID: 2003
     command:
       -n bb_ign_frontend
-      -r /restore.gwbk
+      --restore-local /restore.gwbk
       
   # Postgres Database
   postgres:

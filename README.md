@@ -1,18 +1,18 @@
 # Ignition Bug Bounty
 
-This repository is used as a testing stack for the Ignition 8.1.44 bug bounty
+This repository is used as a testing stack for the Ignition 8.3.9 bug bounty
 
 # How It Works
 
 * Tag data, Tag history, Alarm event data, Alarm Journal, and Audit logs communicate over the Gateway Network
 
 <p align="center">
-  <img src="https://github.com/ia-tgoetz/MQTT-GWN/blob/main/GWNMQTTArch.JPG?raw=true" alt="alt text">
+  <img src="./Architecture.png" alt="An image of an Ignition architecture diagram containing two Ignition servers and a Postgres database.">
 </p>
 
 # Setup
 * Open current dir in your IDE of choice
-* Run ` "docker compose up -d" `
+* Run `docker compose up -d`
 
 # User Accounts Info
 
@@ -28,8 +28,8 @@ This repository is used as a testing stack for the Ignition 8.1.44 bug bounty
 
 # Gateway Info
 
-Backend Gateway Webpage ` https://localhost:18043 `
+Backend Gateway Webpage https://backend.localtest.me:18043
 
-Frontend Gateway Webpage ` https://localhost:28043 `
+Frontend Gateway Webpage https://frontend.localtest.me:28043
 
-Database ` localhost:15432 `
+Database `localhost:15432`
